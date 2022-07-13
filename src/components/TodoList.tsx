@@ -2,7 +2,9 @@ import React from "react";
 import { TodoModel } from "../Model";
 import Todo from "./Todo";
 
-import { List, Grid, Paper } from "@mui/material";
+import { Grid, Stack, Box, Divider } from "@mui/material";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import RemoveDoneIcon from "@mui/icons-material/RemoveDone";
 
 interface TodoListProps {
   todos: TodoModel[];
@@ -11,15 +13,38 @@ interface TodoListProps {
 
 const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
   return (
-    <Grid item xs={12} md={6}>
-      <Paper elevation={3} style={{ backgroundColor: "#C19434" }}>
-        <List>
+    <Stack direction="row" spacing={3}>
+      <Box
+        sx={{
+          p: 2,
+          backgroundColor: "#303841",
+          width: "20rem",
+        }}
+      >
+        <Grid item xs={12} md={6}>
           {todos.map(t => (
             <Todo todo={t} key={t.id} todos={todos} setTodos={setTodos} />
           ))}
-        </List>
-      </Paper>
-    </Grid>
+        </Grid>
+      </Box>
+      <Divider orientation="vertical" flexItem>
+        Todo <RemoveDoneIcon /> - <DoneOutlineIcon />
+        Done
+      </Divider>
+      <Box
+        sx={{
+          p: 2,
+          backgroundColor: "#303841",
+          width: "20rem",
+        }}
+      >
+        <Grid item xs={12} md={6}>
+          {todos.map(t => (
+            <Todo todo={t} key={t.id} todos={todos} setTodos={setTodos} />
+          ))}
+        </Grid>
+      </Box>
+    </Stack>
   );
 };
 

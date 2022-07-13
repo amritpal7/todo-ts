@@ -25,7 +25,7 @@ const InputField: React.FC<InputFieldProps> = ({ todo, setTodo, addTodo }) => {
         <Button
           color="primary"
           type="submit"
-          style={{ backgroundColor: "#c19434" }}
+          style={{ backgroundColor: "#303841" }}
         >
           ADD
         </Button>
