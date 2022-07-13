@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DoneIcon from "@mui/icons-material/Done";
@@ -14,6 +14,12 @@ type Props = {
 const Todo = ({ todo, setTodos, todos }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [edit]);
 
   const markDone = (id: number) => {
     setTodos(
@@ -50,6 +56,7 @@ const Todo = ({ todo, setTodos, todos }: Props) => {
         {edit ? (
           <TextField
             type="string"
+            inputRef={inputRef}
             value={editTodo}
             variant="filled"
             style={{ width: "30rem" }}
