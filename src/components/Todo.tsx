@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DoneIcon from "@mui/icons-material/Done";
@@ -12,6 +12,23 @@ type Props = {
 };
 
 const Todo = ({ todo, setTodos, todos }: Props) => {
+  const [edit, setEdit] = useState<boolean>(false);
+  const [editTodo, setEditTodo] = useState<string>(todo.todo);
+
+  const markDone = (id: number) => {
+    setTodos(
+      todos.map(todo =>
+        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+      )
+    );
+  };
+
+  const updateTodo = (id: number) => {
+    if (!edit && !todo.isDone) {
+      setEdit(!edit);
+    }
+  };
+
   const removeTodo = (id: number) => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
@@ -19,11 +36,19 @@ const Todo = ({ todo, setTodos, todos }: Props) => {
   return (
     <div>
       <ListItem>
-        <ListItemText style={{ color: "#f1f1ef" }} primary={todo} />
-        <IconButton>
+        <ListItemText
+          style={{
+            color: "#f1f1ef",
+            width: "30rem",
+            textDecoration: `${todo.isDone ? "line-through" : "none"}`,
+          }}
+          primary={todo.todo}
+        />
+
+        <IconButton onClick={() => markDone(todo.id)}>
           <DoneIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={() => updateTodo(todo.id)}>
           <EditIcon />
         </IconButton>
         <IconButton onClick={() => removeTodo(todo.id)}>

@@ -13,6 +13,7 @@ const InputField: React.FC<InputFieldProps> = ({ todo, setTodo, addTodo }) => {
     <form onSubmit={addTodo} style={{ margin: "20px" }}>
       <Stack direction="row" spacing={2}>
         <TextField
+          style={{ width: "30rem" }}
           id="my-input"
           type="string"
           placeholder="Enter todo"
