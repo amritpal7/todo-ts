@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Stack, TextField } from "@mui/material";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import "./styles.css";
 
 interface InputFieldProps {
@@ -27,7 +28,7 @@ const InputField: React.FC<InputFieldProps> = ({ todo, setTodo, addTodo }) => {
           type="submit"
           style={{ backgroundColor: "#303841" }}
         >
-          ADD
+          ADD <AddCircleOutlineIcon fontSize="large" />
         </Button>
       </Stack>
     </form>
