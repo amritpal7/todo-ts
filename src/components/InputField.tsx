@@ -1,39 +1,33 @@
 import React from "react";
-import { Input, Button, Stack } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Button, Stack, TextField } from "@mui/material";
+import "./styles.css";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#fff",
-    },
-    secondary: {
-      // This is green.A700 as hex.
-      main: "#11cb5f",
-    },
-  },
-});
-
-interface Props {
+interface InputFieldProps {
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>;
+  addTodo: (e: React.FormEvent) => void;
 }
 
-const InputField: React.FC<Props> = ({ todo, setTodo }) => {
+const InputField: React.FC<InputFieldProps> = ({ todo, setTodo, addTodo }) => {
   return (
-    <form>
-      <Stack spacing={2} direction="row">
-        <ThemeProvider theme={theme}>
-          <Input
-            id="my-input"
-            aria-describedby="my-helper-text"
-            placeholder="Enter todo"
-            color="primary"
-            value={todo}
-            onChange={e => setTodo(e.target.value)}
-          />
-          <Button color="primary">ADD</Button>
-        </ThemeProvider>
+    <form onSubmit={addTodo} style={{ margin: "20px" }}>
+      <Stack direction="row" spacing={2}>
+        <TextField
+          id="my-input"
+          type="string"
+          placeholder="Enter todo"
+          color="primary"
+          value={todo}
+          variant="filled"
+          onChange={e => setTodo(e.target.value)}
+        />
+        <Button
+          color="primary"
+          type="submit"
+          style={{ backgroundColor: "#c19434" }}
+        >
+          ADD
+        </Button>
       </Stack>
     </form>
   );
